@@ -21,16 +21,18 @@ public class BankSimulationAppApplication {
         AccountService accountService = container.getBean(AccountService.class);
         TransactionService transactionService = container.getBean(TransactionService.class);
 
-
+//
         Account sender = accountService.createNewAccount(BigDecimal.valueOf(70.00), new Date(), AccountType.CHECKING, 1L);
         Account receiver = accountService.createNewAccount(BigDecimal.valueOf(30.00), new Date(), AccountType.CHECKING, 2L);
-       // Account sender2 = null;
-        accountService.listAllAccounts().forEach(System.out::println);
+        Account receiver1 = accountService.createNewAccount(BigDecimal.valueOf(30.00), new Date(), AccountType.SAVING, 14L);
 
-        transactionService.makeTransfer(sender, receiver, BigDecimal.valueOf(50), new Date(), "Transaction 1");
-
-        System.out.println(transactionService.findAllTransaction().get(0));
-        accountService.listAllAccounts().forEach(System.out::println);
+//        Account sender2 = null;
+//        accountService.listAllAccounts().forEach(System.out::println);
+//
+//        transactionService.makeTransfer(sender, receiver, BigDecimal.valueOf(50), new Date(), "Transaction 1");
+//
+//        System.out.println(transactionService.findAllTransaction().get(0));
+//        accountService.listAllAccounts().forEach(System.out::println);
 
 
     }

@@ -9,14 +9,18 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.cydeo</groupId>
-    <artifactId>Bank-simulation-app</artifactId>
+    <artifactId>bank-simulation-app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Bank-simulation-app</name>
-    <description>Bank-simulation-app</description>
+    <name>bank-simulation-app</name>
+    <description>bank-simulation-app</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

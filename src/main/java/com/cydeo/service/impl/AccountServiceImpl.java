@@ -1,10 +1,12 @@
 package com.cydeo.service.impl;
 
+import com.cydeo.enums.AccountStatus;
 import com.cydeo.enums.AccountType;
 import com.cydeo.model.Account;
 import com.cydeo.repository.AccountRepository;
 import com.cydeo.service.AccountService;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -27,6 +29,7 @@ public class AccountServiceImpl implements AccountService {
                 .accountType(accountType)
                 .userId(userId)
                 .creationDate(createDate)
+                .accountStatus(AccountStatus.ACTIVE)
                 .build();
 
         // save into db
