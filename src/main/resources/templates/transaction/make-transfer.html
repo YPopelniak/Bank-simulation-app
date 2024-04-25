@@ -55,12 +55,12 @@
                 <h2 class="my-5">Transactions</h2>
                 <table class="table table-striped table-responsive-md">
                     <thead>
-                    <tr>
-                        <th>SenderId</th>
-                        <th>ReceiverId</th>
-                        <th>Amount</th>
-                        <th>TransactionDate</th>
-                        <th>Message</th>
+                    <tr th:each="lastTransaction : ${lastTransactions}">
+                        <th th:text="${lastTransaction.getSender()}">SenderId</th>
+                        <th th:text="${lastTransaction.getReceiver()}">ReceiverId</th>
+                        <th th:text="${lastTransaction.getAmount()}">Amount</th>
+                        <th th:text="${lastTransaction.getCreateDate()}">TransactionDate</th>
+                        <th th:text="${lastTransaction.getMessage()}">Message</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -73,7 +73,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <p class="my-5"><a href="#" class="btn btn-primary">Home Page</a></p>
+                <p class="my-5"><a th:href="@{/index}" class="btn btn-primary">Home Page</a></p>
             </div>
         </div>
     </div>

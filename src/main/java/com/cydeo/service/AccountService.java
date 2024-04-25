@@ -15,5 +15,7 @@ public interface AccountService {
 
     void activateAccount(UUID id);
 
+    Account findById(UUID id);
+
 }
 
