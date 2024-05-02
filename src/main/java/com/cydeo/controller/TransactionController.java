@@ -34,8 +34,10 @@ public class TransactionController {
     }
 
     @PostMapping("/transfer")
-    public String makeTransfer(@Valid @ModelAttribute("transaction") Transaction transaction, BindingResult bindingResult){
+    public String makeTransfer(@Valid @ModelAttribute("transaction") Transaction transaction, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()){
+            model.addAttribute("accounts", accountService.listAllAccounts());
+            model.addAttribute("lastTransactions", transactionService.last10Transactions());
             return "transaction/make-transfer";
         }
 
