@@ -3,8 +3,10 @@ package com.cydeo.controller;
 import com.cydeo.enums.AccountType;
 import com.cydeo.model.Account;
 import com.cydeo.service.AccountService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,17 +38,24 @@ public class AccountController {
     }
 
     @GetMapping("/create-form")
-    public String getCreateFormPage(Model model){
+    public String getCreateFormPage(@Valid Model model){
 
-        //we need to provide empty account object
+
         model.addAttribute("account", Account.builder().build());
-        //we need to provide accountType enum info for filling the dropdown options
+
         model.addAttribute("accountTypes", AccountType.values());
-        return "account/create-account";
+
+         return "account/create-account";
     }
 
     @PostMapping("/create")
-    public String captureInformation(@ModelAttribute("account") Account account){
+    public String createAccount(@Valid @ModelAttribute("account") Account account, BindingResult bindingResult,Model model ){
+        if(bindingResult.hasErrors()){
+            System.out.println(bindingResult.getErrorCount());
+            model.addAttribute("accountTypes", AccountType.values());
+            return "account/create-account";
+        }
+        System.out.println(account);
         Account newAccount = accountService.createNewAccount(account.getBalance(),new Date(),account.getAccountType(),account.getUserId());
         System.out.println(newAccount);
         return "redirect:/index";
