@@ -36,31 +36,31 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
 
-    @Override
-    public TransactionDTO makeTransfer(AccountDTO sender, AccountDTO receiver, BigDecimal amount, Date creationDate, String message) {
-        if(!underConstruction) {
-        /*
-            -if sender or receiver is null ?
-            -if sender and receiver is the same account ?
-            -if sender has enough balance to make transfer ?
-            if both accounts are checking, if not, one of them saving, it needs to be same userId
-         */
-            validateAccount(sender, receiver);
-            checkAccountOwnership(sender, receiver);
-            executeBalanceAndUpdateIfRequired(amount, sender, receiver);
-
-         /*
-            after all validations are completed, and money is transferred, we need to create Transaction object save/return it.
-          */
-            TransactionDTO transactionDTO = new TransactionDTO();
-
-            //save into db and return it
+//    @Override
+//    public TransactionDTO makeTransfer(AccountDTO sender, AccountDTO receiver, BigDecimal amount, Date creationDate, String message) {
+//        if(!underConstruction) {
+//        /*
+//            -if sender or receiver is null ?
+//            -if sender and receiver is the same account ?
+//            -if sender has enough balance to make transfer ?
+//            if both accounts are checking, if not, one of them saving, it needs to be same userId
+//         */
+//            validateAccount(sender, receiver);
+//            checkAccountOwnership(sender, receiver);
+//            executeBalanceAndUpdateIfRequired(amount, sender, receiver);
+//
+//         /*
+//            after all validations are completed, and money is transferred, we need to create Transaction object save/return it.
+//          */
+//            TransactionDTO transactionDTO = new TransactionDTO();
+//
+//            //save into db and return it
+////            return transactionRepository.save(transactionDTO);
 //            return transactionRepository.save(transactionDTO);
-            return transactionRepository.save(transactionDTO);
-        }else {
-            throw new UnderConstructionException("App is under construction, please try again later");
-        }
-    }
+//        }else {
+//            throw new UnderConstructionException("App is under construction, please try again later");
+//        }
+//    }
 
     private void executeBalanceAndUpdateIfRequired(BigDecimal amount, AccountDTO sender, AccountDTO receiver) {
         if(checkSenderBalance(sender,amount)){
@@ -118,6 +118,11 @@ public class TransactionServiceImpl implements TransactionService {
 
     private void findAccountById(Long id) {
         accountService.findById(id);
+    }
+
+    @Override
+    public TransactionDTO makeTransfer(AccountDTO sender, AccountDTO receiver, BigDecimal amount, Date creationDate, String message) {
+        return null;
     }
 
     @Override
