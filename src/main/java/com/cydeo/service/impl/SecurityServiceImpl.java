@@ -6,7 +6,9 @@ import com.cydeo.repository.UserRepository;
 import com.cydeo.service.SecurityService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class SecurityServiceImpl implements SecurityService {
 
     private final UserRepository userRepository;
@@ -17,13 +19,15 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUserName(username);
-
-        if (user == null){
-            throw new UsernameNotFoundException("This user does not exists");
-        }
-
+        //TASK
+        //we need to get our own user from database. how ?
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(()->new UsernameNotFoundException("user does not exist"));
+        //return some exception if user does not exist
+//        if(user==null){
+//            throw new UsernameNotFoundException("Username: "+ username+" not exist");
+//        }
+        //return user information as a UserDetails
         return new UserPrincipal(user);
-
     }
 }
